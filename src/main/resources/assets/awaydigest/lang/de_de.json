@@ -1,0 +1,7 @@
+{
+    "awaydigest.welcome": "Willkommen zurück — du warst etwa %s Stunde(n) weg.",
+    "awaydigest.quiet": "Es war ruhig — keine Fortschritte, während du weg warst.",
+    "awaydigest.adv.head": "Während du weg warst, haben andere %s Fortschritt(e) erreicht:",
+    "awaydigest.adv.entry": "  %1$s erreichte \"%2$s\"",
+    "awaydigest.adv.more": "  ...und %s weitere."
+}

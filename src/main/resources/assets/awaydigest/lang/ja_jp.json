@@ -1,0 +1,7 @@
+{
+    "awaydigest.welcome": "おかえり — 約 %s 時間ぶりだね。",
+    "awaydigest.quiet": "静かだったよ — 留守中の進捗達成はなし。",
+    "awaydigest.adv.head": "留守の間に他のみんなが %s 件の進捗を達成：",
+    "awaydigest.adv.entry": "  %1$s が「%2$s」を達成",
+    "awaydigest.adv.more": "  …他 %s 件。"
+}
