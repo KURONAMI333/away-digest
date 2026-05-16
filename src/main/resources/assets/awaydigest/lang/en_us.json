@@ -1,7 +1,7 @@
 {
     "awaydigest.welcome": "Welcome back — you were away about %s hour(s).",
     "awaydigest.quiet": "It was quiet — no advancements while you were gone.",
-    "awaydigest.adv.head": "While you were away, others earned %s advancement(s):",
+    "awaydigest.adv.head": "While you were away, others earned at least %s advancement(s):",
     "awaydigest.adv.entry": "  %s earned \"%s\"",
     "awaydigest.adv.more": "  ...and %s more."
 }

@@ -1,7 +1,7 @@
 {
     "awaydigest.welcome": "Bem-vindo de volta — você ficou fora cerca de %s hora(s).",
     "awaydigest.quiet": "Foi tranquilo — nenhum progresso enquanto você esteve fora.",
-    "awaydigest.adv.head": "Enquanto você esteve fora, outros conquistaram %s progresso(s):",
+    "awaydigest.adv.head": "Enquanto você esteve fora, outros conquistaram pelo menos %s progresso(s):",
     "awaydigest.adv.entry": "  %1$s conquistou \"%2$s\"",
     "awaydigest.adv.more": "  ...e mais %s."
 }
