@@ -39,7 +39,7 @@ Server-side: login/logout + advancement listeners + persistent world data. No mi
 
 ## Known limitations
 
-v0.1 recap = away-time + other players' advancements only (deliberately minimal). It shines on a multiplayer SMP; single-player just shows the away-time greeting (no other players to report).
+v0.1 recap = away-time + other players' advancements only (deliberately minimal). It shines on a multiplayer SMP; single-player just shows the away-time greeting (no other players to report). The mod's own messages are localized in 9 languages, but each **advancement's title** is shown in the server's language (captured as text when earned), not the reader's. A very busy server keeps the last ~500 advancements; a very long absence may surface only the most recent — the wording says "at least N", never overclaiming completeness.
 
 ## Install
 

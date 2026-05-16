@@ -21,7 +21,7 @@ import net.minecraft.world.level.saveddata.SavedData;
 public class AwayDigestData extends SavedData {
 
     private static final String NAME = "awaydigest";
-    private static final int MAX_ADV = 100;
+    private static final int MAX_ADV = 500;
 
     private static final Factory<AwayDigestData> FACTORY =
         new Factory<>(AwayDigestData::new, AwayDigestData::load, null);
