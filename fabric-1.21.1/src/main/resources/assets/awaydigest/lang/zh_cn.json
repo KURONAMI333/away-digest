@@ -1,0 +1,7 @@
+{
+    "awaydigest.welcome": "欢迎回来 —— 你离开了大约 %s 小时。",
+    "awaydigest.quiet": "很安静 —— 你离开期间没有人达成进度。",
+    "awaydigest.adv.head": "你离开期间，其他人至少达成了 %s 项进度：",
+    "awaydigest.adv.entry": "  %1$s 达成了“%2$s”",
+    "awaydigest.adv.more": "  ……还有 %s 项。"
+}
