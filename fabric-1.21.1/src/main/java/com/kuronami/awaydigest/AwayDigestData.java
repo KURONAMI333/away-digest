@@ -26,7 +26,8 @@ public class AwayDigestData extends SavedData {
     private static final Factory<AwayDigestData> FACTORY =
         new Factory<>(AwayDigestData::new, AwayDigestData::load, null);
 
-    public record Adv(long ms, String player, String title) {}
+    /** {@code playerUuid} identifies who earned it (stable across renames); {@code playerName} is display-only. */
+    public record Adv(long ms, UUID playerUuid, String playerName, String title) {}
 
     private final Map<UUID, Long> lastLogout = new HashMap<>();
     private final List<Adv> adv = new ArrayList<>(); // oldest first
@@ -44,19 +45,19 @@ public class AwayDigestData extends SavedData {
         setDirty();
     }
 
-    public void addAdvancement(long ms, String player, String title) {
-        adv.add(new Adv(ms, player, title));
+    public void addAdvancement(long ms, UUID playerUuid, String playerName, String title) {
+        adv.add(new Adv(ms, playerUuid, playerName, title));
         while (adv.size() > MAX_ADV) {
             adv.remove(0);
         }
         setDirty();
     }
 
-    /** Advancements after {@code sinceMs} earned by someone other than {@code exceptPlayer}. */
-    public List<Adv> advancementsSince(long sinceMs, String exceptPlayer) {
+    /** Advancements after {@code sinceMs} earned by someone other than {@code exceptPlayerUuid}. */
+    public List<Adv> advancementsSince(long sinceMs, UUID exceptPlayerUuid) {
         List<Adv> out = new ArrayList<>();
         for (Adv a : adv) {
-            if (a.ms() > sinceMs && !a.player().equals(exceptPlayer)) {
+            if (a.ms() > sinceMs && !a.playerUuid().equals(exceptPlayerUuid)) {
                 out.add(a);
             }
         }
@@ -73,7 +74,8 @@ public class AwayDigestData extends SavedData {
         for (Adv a : adv) {
             CompoundTag c = new CompoundTag();
             c.putLong("ms", a.ms());
-            c.putString("p", a.player());
+            c.putString("u", a.playerUuid().toString());
+            c.putString("p", a.playerName());
             c.putString("t", a.title());
             lt.add(c);
         }
@@ -94,7 +96,15 @@ public class AwayDigestData extends SavedData {
         ListTag lt = tag.getList("adv", Tag.TAG_COMPOUND);
         for (int i = 0; i < lt.size(); i++) {
             CompoundTag c = lt.getCompound(i);
-            d.adv.add(new Adv(c.getLong("ms"), c.getString("p"), c.getString("t")));
+            if (!c.contains("u")) {
+                continue; // pre-UUID-migration entry — can't attribute reliably, discard
+            }
+            try {
+                UUID uuid = UUID.fromString(c.getString("u"));
+                d.adv.add(new Adv(c.getLong("ms"), uuid, c.getString("p"), c.getString("t")));
+            } catch (IllegalArgumentException ignored) {
+                // corrupt uuid — skip entry rather than fail world load
+            }
         }
         return d;
     }

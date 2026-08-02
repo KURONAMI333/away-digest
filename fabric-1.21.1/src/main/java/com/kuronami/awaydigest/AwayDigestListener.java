@@ -35,8 +35,7 @@ public final class AwayDigestListener {
             return; // under an hour away: a dropped connection is not a trip worth recapping.
         }
         long hours = Math.round(elapsed / 3_600_000.0);
-        String me = player.getGameProfile().getName();
-        List<AwayDigestData.Adv> since = data.advancementsSince(last, me);
+        List<AwayDigestData.Adv> since = data.advancementsSince(last, player.getUUID());
 
         player.sendSystemMessage(Component.translatable("awaydigest.welcome", hours)
             .withStyle(ChatFormatting.GOLD));
@@ -51,7 +50,7 @@ public final class AwayDigestListener {
         for (int i = 0; i < shown; i++) {
             AwayDigestData.Adv a = since.get(i);
             player.sendSystemMessage(Component.translatable(
-                "awaydigest.adv.entry", a.player(), a.title())
+                "awaydigest.adv.entry", a.playerName(), a.title())
                 .withStyle(ChatFormatting.GRAY));
         }
         if (since.size() > shown) {
@@ -77,6 +76,7 @@ public final class AwayDigestListener {
         MinecraftServer server = player.getServer();
         AwayDigestData.get(server).addAdvancement(
             System.currentTimeMillis(),
+            player.getUUID(),
             player.getGameProfile().getName(),
             title);
     }
