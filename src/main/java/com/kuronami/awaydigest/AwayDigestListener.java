@@ -29,7 +29,11 @@ public class AwayDigestListener {
         if (last == null) {
             return; // first time we've seen them — nothing to recap yet.
         }
-        long hours = Math.round((System.currentTimeMillis() - last) / 3_600_000.0);
+        long elapsed = System.currentTimeMillis() - last;
+        if (elapsed < 3_600_000L) {
+            return; // under an hour away: a dropped connection is not a trip worth recapping.
+        }
+        long hours = Math.round(elapsed / 3_600_000.0);
         String me = player.getGameProfile().getName();
         List<AwayDigestData.Adv> since = data.advancementsSince(last, me);
 
